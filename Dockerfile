@@ -13,9 +13,16 @@ RUN pip install nblint
 RUN pip install matplotlib
 RUN pip install seaborn
 RUN pip install scikit-learn
+RUN pip install datasets
+RUN pip install datasets[vision]
 
 # Set up the working directory
 WORKDIR /workspace
+
+# location for HF dataset cache
+RUN mkdir /workspace/hf_cache
+RUN chmod -R 777 /workspace/hf_cache
+ENV HF_DATASETS_CACHE=/workspace/hf_cache
 
 # Change the ownership and permissions of /.local and /workspace
 RUN mkdir /.local /.jupyter
