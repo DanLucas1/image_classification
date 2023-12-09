@@ -1,5 +1,6 @@
 # Start from a PyTorch base image with GPU support
 FROM pytorch/pytorch:latest
+#FROM pytorch/pytorch:2.1.1-cuda12.1-cudnn8-runtime
 
 # Update the system and install necessary software
 RUN apt-get update && apt-get install -y \
