@@ -12,10 +12,14 @@ RUN apt-get update && apt-get install -y \
 # Set up the working directory
 WORKDIR /workspace
 
-# location for HF dataset cache and permissions
-RUN mkdir /.local /.jupyter /workspace/hf_cache \
-    && chmod -R 777 /.local /.jupyter /workspace/hf_cache \
-    && echo "export HF_DATASETS_CACHE=/workspace/hf_cache" >> ~/.bashrc
+# location for HF dataset cache
+RUN mkdir /workspace/hf_cache
+RUN chmod -R 777 /workspace/hf_cache
+ENV HF_DATASETS_CACHE=/workspace/hf_cache
+
+# Change the ownership and permissions of /.local and /workspace
+RUN mkdir /.local /.jupyter
+RUN chmod -R 777 /.local /.jupyter /workspace
 
 # When the container launches, start a Jupyter Notebook server
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
