@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     && rm -rf /var/lib/apt/lists/* \
     # Install Python packages
-    && pip install jupyter jupyterlab matplotlib seaborn scikit-learn datasets datasets[vision]
+    && pip install jupyter jupyterlab matplotlib seaborn scikit-learn datasets datasets[vision] wikipedia
 
 # Set up the working directory
 WORKDIR /workspace
