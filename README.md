@@ -6,7 +6,9 @@ An exploration of ML model training to classify 10 categories of instruments usi
 
 ## Process
 
-### 1) Initial Model - [notebook](https://github.com/DanLucas1/image_classification/blob/main/img_classification_instruments.ipynb)
+### 1) Initial Model
+#### ([notebook](https://github.com/DanLucas1/image_classification/blob/main/img_classification_instruments.ipynb))
+
 The first training run adapted [this](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html) PyTorch training tutorial to use the Hugging Face data. Hugging Face has conversion to PyTorch tensors built into their datasets library, so only some basic data prep was required (conversions to RBG, tensor data types, resizing, normalization).
 
 The model was a simple 6 layer Convolutional Neural Network from the Pytorch classifier page. Due to the small dataset and model size, a local environment was sufficient for training during this first step. I performed 25 epochs of training, and the resulting outperformed a baseline random guess of 10% accuracy but overfit before reaching 50% accuracy on the test data.
@@ -18,7 +20,9 @@ The 1000 images total were split into test/training sets at an 80/20 ratio, mean
 Since using this particular model required downsizing the images to 32x32, my next step was to substitute in a model that would allow me to use the images without removing so much of their information.
 
 
-### 2) Upgrading to Resnet - [notebook](https://github.com/DanLucas1/image_classification/blob/main/img_classification_instruments-model-upgrade.ipynb)
+### 2) Upgrading to Resnet
+#### ([notebook](https://github.com/DanLucas1/image_classification/blob/main/img_classification_instruments-model-upgrade.ipynb))
+
 Image classification is not a novel task, and there are plenty of well known models that can be fine tuned to perform on target datasets. Of the well known options, Resnet offered a smaller version (resnet-18) which would be less likely to immediately overfit the small dataset, and has support to import from PyTorch directly. Working with the resnet-18 model required a more powerful training environment, so the remainder of the project took place in a Dockerized training environment running on a Google Cloud Compute Engine VM with GPU support.
 
 Resnet-18 had much stronger predictions on test data (77%) but still overfit very quickly. I experimented with lowering the learning rate, which slowed down the overfitting as planned but didn't translate to higher accuracy on test data. The new confusion matrix shows a clear improvement.
@@ -33,7 +37,9 @@ However, loss and training accuracy suggest that we have hit an accuracy cap.
 These results are unsurprising given the limitations of data quantity and variety. To address those limitations I turned to Image Augmentation.
 
 
-### 3) Image Augmentation - [notebook](https://github.com/DanLucas1/image_classification/blob/main/img_classification_instruments-augmentation.ipynb)
+### 3) Image Augmentation
+#### ([notebook](https://github.com/DanLucas1/image_classification/blob/main/img_classification_instruments-augmentation.ipynb))
+
 The next training run was identical for step #2 except for the application of [AugMix](https://arxiv.org/pdf/1912.02781) to the training data (and some minor changes to preprocessing to successfully apply Augmix). AugMix applies multiple augmentations with inbuilt randomization to create a more robust distribution of training data. By applying these transformations during each batch of each training loop I would functionally increase the size and variety of my dataset.
 
 The results were consistent with that expectation. The final training loop before loss started to rebound showed 90.75% accuracy on training data and 90.5% on test data, and the confusion matrix for that model state shows a much stronger predictive pattern across all categories.
