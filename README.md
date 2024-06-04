@@ -1,8 +1,7 @@
 # Machine Learning for Image Classification
-A deep learning model training exercise employing PyTorch and HuggingFace to train models for image classification. A video walkthrough of the project is also available [here](https://www.youtube.com/watch?v=uycarDpI4oc).
 
 ## Project Summary
-An exploration of ML model training to classify 10 categories of instruments using PyTorch (primarily the torchvision library) and this [training data](https://huggingface.co/datasets/YakupAkdin/instrument-images/tree/main) of 1000 images from Hugging Face datasets. The final project included training a basic 6 layer model before moving on to fine tuning runs using the resnet-18 model and applying image augmentation to account for the small dataset size.
+An exploration of ML model training to classify 10 categories of instruments using PyTorch (primarily the torchvision library) and this [training data](https://huggingface.co/datasets/YakupAkdin/instrument-images/tree/main) of 1000 images from Hugging Face datasets. The final project included training a basic 6 layer model before moving on to fine tuning runs using the resnet-18 model and applying image augmentation to account for the small dataset size. A video walkthrough of the project is also available [here](https://www.youtube.com/watch?v=uycarDpI4oc).
 
 ## Process
 
